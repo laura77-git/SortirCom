@@ -19,6 +19,7 @@ security:
             form_login:
                 login_path: security_login
                 check_path: security_login
+                default_target_path: home_connected
 
             logout:
                 path: security_logout
