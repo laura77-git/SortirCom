@@ -1,0 +1,56 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <a class="navbar-brand" href="{{ path('home_connected') }}">Accueil</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a href="{{ path('myProfile') }}" class="nav-link">Mon profil</a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ path('security_login') }}" class="nav-link">Se déconnecter</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div class="jumbotron text-center">
+        <h1>Sortir.com</h1>
+    </div>
+    <h2 style="text-align: center; margin-bottom:40px">Annuler une sortie</h2>
+    <div class="container" style="text-align: center;">
+        <div class="row" style="justify-content:center">
+            <div class="col-md-12">
+                <label>Nom de la sortie :</label>
+            </div>
+            <div class="col-md-12">
+                <label>Date de la sortie :</label>
+            </div>
+            <div class="col-md-12">
+                <label>Campus :</label>
+            </div>
+            <div class="col-md-12">
+                <label>Lieu :</label>
+            </div>
+            <div class="col-md-12">
+                <label>Motif :</label>
+                <input>
+            </div>
+            <div class="col-md-6">
+                <a href="#">
+                    <button type="submit" class="btn btn-primary">Enregistrer</button>
+                </a>
+            </div>
+            <div class="col-md-6">
+                <a href="{{ path('home_connected') }}">
+                    <button type="submit" class="btn btn-primary">Annuler</button>
+                </a>
+            </div>
+        </div>
+
+    </div>
+{% endblock %}

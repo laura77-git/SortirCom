@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="jumbotron text-center">
+        <h1>Sortir.com</h1>
+    </div>
+    <h1 style="text-align: center; margin-bottom:40px">Connexion</h1>
+    <div class="container" style="text-align: center;">
+        <div class="row" style="justify-content:center">
+            <form action="{{ path('security_login') }}" method="post">
+                <div class="col-md-10">
+                    <label>Identifiant:
+                    <input type="email" name="_username" placeholder="Adresse email ou pseudo" class="form-control" required />
+                    </label>
+                    <br>
+                    <label>Mot de passe :
+                    <input type="password" name="_password" placeholder="Mot de passe" class="form-control" required />
+                    </label>
+                    <br>
+                </div>
+                <div class="col-md-12">
+                    <a href="{{ path('home_connected') }}">
+                        <button type="submit" class="btn btn-primary" name="login">Connexion</button>
+                    </a>
+                    <input type="checkbox" id="remember_me" name="_remember_me"/>
+                    <label for="remember_me">Se souvenir de moi</label><br>
+                    <a  style="margin-left: 100px" href>Mot de passe oublié</a>
+                </div>
+            </form>
+
+        </div>
+    </div>
+{% endblock %}

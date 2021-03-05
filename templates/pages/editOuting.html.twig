@@ -1,0 +1,98 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <a class="navbar-brand" href="{{ path('home_connected') }}">Accueil</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a href="{{ path('myProfile') }}" class="nav-link">Mon profil</a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ path('security_login') }}" class="nav-link">Se déconnecter</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div class="jumbotron text-center">
+        <h1>Sortir.com</h1>
+    </div>
+    <h2 style="text-align: center; margin-bottom:40px">Modifier une sortie</h2>
+    <div class="container" style="text-align: center;">
+        <div class="row" style="justify-content:center">
+            <div class="col-md-6">
+                <label>Nom de la sortie :</label>
+                <input value="">
+            </div>
+            <div class="col-md-6">
+                <label>Campus :</label>
+                <input value="">
+            </div>
+            <div class="col-md-6">
+                <label>Date et heure de la sortie :</label>
+                <input value="">
+            </div>
+            <div class="col-md-6">
+                <label>Lieu :</label>
+                <input value="">
+            </div>
+            <div class="col-md-6">
+                <label>Date limite d'inscription :</label>
+                <input value="">
+            </div>
+            <div class="col-md-6">
+                <label>Rue :</label>
+                <input value="">
+            </div>
+            <div class="col-md-6">
+                <label>Nombres de places :</label>
+                <input value="">
+            </div>
+            <div class="col-md-6">
+                <label>Code postal :</label>
+                <input value="">
+            </div>
+            <div class="col-md-6">
+                <label>Durée :</label>
+                <input value="">
+            </div>
+            <div class="col-md-6">
+                <label>Latitude :</label>
+                <input value="">
+            </div>
+            <div class="col-md-6">
+                <label>Description et infos :</label>
+                <input value="">
+            </div>
+            <div class="col-md-6">
+                <label>Longitude :</label>
+                <input value="">
+            </div>
+        <br><br>
+        <div class="col-md-3">
+            <a href="#">
+                <button type="submit" class="btn btn-primary">Enregistrer</button>
+            </a>
+        </div>
+            <div class="col-md-3">
+            <a href="#">
+                <button type="submit" class="btn btn-primary">Publier la sortie</button>
+            </a>
+            </div>
+            <div class="col-md-3">
+            <a href="#">
+                <button type="submit" class="btn btn-primary">Supprimer la sortie</button>
+            </a>
+            </div>
+            <div class="col-md-3">
+            <a href="{{ path('home_connected') }}">
+                <button type="submit" class="btn btn-primary">Annuler</button>
+            </a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

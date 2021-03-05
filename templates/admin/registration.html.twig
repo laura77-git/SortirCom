@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="jumbotron text-center">
+        <h1>Sortir.com</h1>
+    </div>
+    <h2 style="text-align: center; margin-bottom:40px">Inscription</h2>
+    <div class="container" style="text-align: center;">
+        {{ form_start(form) }}
+        <div class="row" style="justify-content:center">
+            <div class="col-md-6">{{ form_row(form.name, {'label': 'Nom'}) }}</div>
+            <div class="col-md-6">{{ form_row(form.firstname,{'label': 'Prénom'}) }}</div>
+            <div class="col-md-6">{{ form_row(form.pseudo, {'label': 'Pseudo'}) }}</div>
+            <div class="col-md-6">{{ form_row(form.phone, {'label': 'Téléphone'}) }}</div>
+            <div class="col-md-6">{{ form_row(form.email, {'label': 'Email'}) }}</div>
+            <div class="col-md-6"> {{ form_row(form.password, {'label': 'Mot de passe'}) }}</div>
+            <div class="col-md-6">{{ form_row(form.confirm_password, {'label': 'Confirmation mot de passe'}) }}</div>
+        </div>
+        <button type="submit" class="btn btn-primary">Enregistrer</button>
+        {{ form_end(form) }}
+    </div>
+{% endblock %}

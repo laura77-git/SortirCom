@@ -1,0 +1,82 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <a class="navbar-brand" href="{{ path('home_connected') }}">Accueil</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a href="{{ path('myProfile') }}" class="nav-link">Mon profil</a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ path('security_login') }}" class="nav-link">Se déconnecter</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div class="jumbotron text-center">
+        <h1>Sortir.com</h1>
+    </div>
+    <h2 style="text-align: center; margin-bottom:40px">Afficher une sortie</h2>
+    <div class="container" style="text-align: center;">
+        <div class="row" style="justify-content:center">
+            <div class="col-md-6">
+                <label>Nom de la sortie :</label>
+            </div>
+            <div class="col-md-6">
+                <label>Campus :</label>
+            </div>
+            <div class="col-md-6">
+                <label>Date et heure de la sortie :</label>
+            </div>
+            <div class="col-md-6">
+                <label>Lieu :</label>
+            </div>
+            <div class="col-md-6">
+                <label>Date limite d'inscription :</label>
+            </div>
+            <div class="col-md-6">
+                <label>Rue :</label>
+            </div>
+            <div class="col-md-6">
+                <label>Nombres de places :</label>
+            </div>
+            <div class="col-md-6">
+                <label>Code postal :</label>
+            </div>
+            <div class="col-md-6">
+                <label>Durée :</label>
+            </div>
+            <div class="col-md-6">
+                <label>Latitude :</label>
+            </div>
+            <div class="col-md-6">
+                <label>Description et infos :</label>
+            </div>
+            <div class="col-md-6">
+                <label>Longitude :</label>
+            </div>
+        </div>
+        <br>
+        <h5>Liste des participants inscrits</h5>
+        <br>
+        <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>Pseudo</th>
+                    <th>Nom</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td></td>
+                    <td></td>
+                </tr>
+                </tbody>
+            </table>
+    </div>
+{% endblock %}
