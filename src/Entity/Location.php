@@ -37,6 +37,10 @@ class Location
      */
     private $longitude;
 
+
+    /** @ORM\ManyToOne(targetEntity="App\Entity\City", inversedBy="Location") */
+    private $city;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -89,4 +93,26 @@ class Location
 
         return $this;
     }
+
+    /**
+     * @param mixed $city
+     *
+     * @return Location
+     */
+    public function setCity($city): Location
+    {
+        $this->city = $city;
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCity()
+    {
+        return $this->city;
+    }
+
+
 }

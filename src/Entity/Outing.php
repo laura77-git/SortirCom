@@ -44,9 +44,53 @@ class Outing
     private $outing_info;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\ManyToOne(targetEntity="App\Entity\State", inversedBy="Outing")
      */
     private $state;
+
+    /**
+     * @param mixed $state
+     *
+     * @return Outing
+     */
+    public function setState($state): Outing
+    {
+        $this->state = $state;
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getState()
+    {
+        return $this->state;
+    }
+
+    /** @ORM\ManyToOne(targetEntity="App\Entity\Location", inversedBy="Outing") */
+    private $location;
+
+    /**
+     * @param mixed $location
+     *
+     * @return Outing
+     */
+    public function setLocation($location): Outing
+    {
+        $this->location = $location;
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getLocation()
+    {
+        return $this->location;
+    }
 
     public function getId(): ?int
     {
@@ -77,7 +121,7 @@ class Outing
         return $this;
     }
 
-    public function getRegistrationDeadline():?date
+    public function getRegistrationDeadline():?int
     {
         return $this->registration_deadline;
     }
@@ -113,15 +157,5 @@ class Outing
         return $this;
     }
 
-    public function getState(): ?string
-    {
-        return $this->state;
-    }
 
-    public function setState(string $state): self
-    {
-        $this->state = $state;
-
-        return $this;
-    }
 }

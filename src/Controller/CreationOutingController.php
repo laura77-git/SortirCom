@@ -3,6 +3,8 @@
 namespace App\Controller;
 
 use App\Entity\Outing;
+use App\Entity\State;
+use App\Enum\Etat;
 use App\Form\OutingType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -20,8 +22,10 @@ class CreationOutingController extends AbstractController
      */
     public function outing(Request $request, EntityManagerInterface $em): Response
     {
+        $state = $em->getRepository(State::class)->findOneBy(['name' => 'En attente']);
+
         $outing = new Outing();
-        $form = $this->createForm(OutingType::class);
+        $form = $this->createForm(OutingType::class, $outing);
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid())

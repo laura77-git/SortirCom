@@ -64,6 +64,54 @@ class User implements UserInterface
      */
     public $confirm_password;
 
+
+    /** @ORM\ManyToOne(targetEntity="App\Entity\Campus", inversedBy="User") */
+    private $campus;
+
+    /**
+     * @param mixed $campus
+     *
+     * @return User
+     */
+    public function setCampus($campus): User
+    {
+        $this->campus = $campus;
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCampus()
+    {
+        return $this->campus;
+    }
+
+
+    /** @ORM\ManyToMany(targetEntity="App\Entity\Outing") */
+    private $outing;
+
+    /**
+     * @param mixed $outing
+     *
+     * @return User
+     */
+    public function setOuting($outing): User
+    {
+        $this->outing = $outing;
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getOuting()
+    {
+        return $this->outing;
+    }
+
     public function getId(): ?int
     {
         return $this->id;
@@ -122,6 +170,11 @@ class User implements UserInterface
         return $this->email;
     }
 
+    public function getUsername(): string
+    {
+        return $this->email;
+    }
+
     public function setEmail(string $email): self
     {
         $this->email = $email;
@@ -149,11 +202,6 @@ class User implements UserInterface
     public function getSalt()
     {
         // TODO: Implement getSalt() method.
-    }
-
-    public function getUsername()
-    {
-        // TODO: Implement getUsername() method.
     }
 
     public function eraseCredentials()

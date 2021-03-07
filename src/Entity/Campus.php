@@ -22,6 +22,29 @@ class Campus
      */
     private $name;
 
+    /** @ORM\OneToMany(targetEntity="App\Entity\Outing", mappedBy="Campus") */
+    private $outing;
+
+    /**
+     * @param mixed $outing
+     *
+     * @return Campus
+     */
+    public function setOuting($outing): Campus
+    {
+        $this->outing = $outing;
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getOuting()
+    {
+        return $this->outing;
+    }
+
     public function getId(): ?int
     {
         return $this->id;

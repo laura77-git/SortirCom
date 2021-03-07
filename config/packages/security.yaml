@@ -7,7 +7,6 @@ security:
         in_database:
             entity:
                 class: App\Entity\User
-                property: email
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
@@ -20,6 +19,11 @@ security:
                 login_path: security_login
                 check_path: security_login
                 default_target_path: home_connected
+
+            remember_me:
+                secret: '%kernel.secret%'
+                lifetime: 604800 # 1 week in seconds
+                path: /
 
             logout:
                 path: security_logout
