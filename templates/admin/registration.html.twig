@@ -11,6 +11,7 @@
             <div class="col-md-6">{{ form_row(form.name, {'label': 'Nom'}) }}</div>
             <div class="col-md-6">{{ form_row(form.firstname,{'label': 'Prénom'}) }}</div>
             <div class="col-md-6">{{ form_row(form.pseudo, {'label': 'Pseudo'}) }}</div>
+            <div class="col-md-6">{{ form_row(form.campus, {'label': 'Campus'}) }}</div>
             <div class="col-md-6">{{ form_row(form.phone, {'label': 'Téléphone'}) }}</div>
             <div class="col-md-6">{{ form_row(form.email, {'label': 'Email'}) }}</div>
             <div class="col-md-6"> {{ form_row(form.password, {'label': 'Mot de passe'}) }}</div>
@@ -18,8 +19,8 @@
         </div>
         <button type="submit" class="btn btn-primary">Enregistrer</button>
         {{ form_end(form) }}
-        {% for message in app.flashes('info') %}
-            <div class="flash-info">
+        {% for message in app.flashes('success') %}
+            <div class="alert alert-success">
                 {{ message }}
             </div>
         {% endfor %}

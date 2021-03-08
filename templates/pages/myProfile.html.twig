@@ -47,14 +47,14 @@
                         <label for="confirm_password">Confirmation :</label>
                     <input type="password" name="confirm_password" id="confirm_password" value="{{ app.user.confirm_password }}"/>
                 </p>
-                <p>
+                <div class="row">
                     <label for="campus">Campus :</label>
                     <select name="campus" id="campus">
-                        <option value="Saint Herblain">Saint Herblain</option>
-                        <option value="Rennes">Rennes</option>
+                        {% for camp in campus %}
+                            <option value="{{ camp.name }}">{{ camp.name }}</option>
+                        {% endfor %}
                     </select>
-
-                </p>
+                </div>
                 <p>
                     <label for="photo">Ma photo :</label>
                     <button type="submit">Télécharger vers le serveur</button>

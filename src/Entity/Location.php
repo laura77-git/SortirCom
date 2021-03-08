@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\LocationRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -16,6 +18,22 @@ class Location
      * @ORM\Column(type="integer")
      */
     private $id;
+
+    /**
+     * @return mixed
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @param mixed $id
+     */
+    public function setId($id): void
+    {
+        $this->id = $id;
+    }
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -37,14 +55,23 @@ class Location
      */
     private $longitude;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Outing::class, mappedBy="location", orphanRemoval=true)
+     */
+    private $outings;
 
-    /** @ORM\ManyToOne(targetEntity="App\Entity\City", inversedBy="Location") */
-    private $city;
+    /**
+     * @ORM\ManyToOne(targetEntity=City::class, inversedBy="locations")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $City;
 
-    public function getId(): ?int
+    public function __construct()
     {
-        return $this->id;
+        $this->outings = new ArrayCollection();
     }
+
+
 
     public function getName(): ?string
     {
@@ -95,24 +122,47 @@ class Location
     }
 
     /**
-     * @param mixed $city
-     *
-     * @return Location
+     * @return Collection|Outing[]
      */
-    public function setCity($city): Location
+    public function getOutings(): Collection
     {
-        $this->city = $city;
+        return $this->outings;
+    }
+
+    public function addOuting(Outing $outing): self
+    {
+        if (!$this->outings->contains($outing)) {
+            $this->outings[] = $outing;
+            $outing->setLocation($this);
+        }
 
         return $this;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getCity()
+    public function removeOuting(Outing $outing): self
     {
-        return $this->city;
+        if ($this->outings->removeElement($outing)) {
+            // set the owning side to null (unless already changed)
+            if ($outing->getLocation() === $this) {
+                $outing->setLocation(null);
+            }
+        }
+
+        return $this;
     }
+
+    public function getCity(): ?City
+    {
+        return $this->City;
+    }
+
+    public function setCity(?City $City): self
+    {
+        $this->City = $City;
+
+        return $this;
+    }
+
 
 
 }

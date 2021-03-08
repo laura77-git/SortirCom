@@ -3,11 +3,14 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
+// uniqueEntity permet de vérifier l'unicité d'un ou plusieurs champs d'une entité.
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
  * @UniqueEntity(
@@ -47,6 +50,7 @@ class User implements UserInterface
      */
     private $phone;
 
+    // assert\Email oblige à ce qu'il y ait un @
     /**
      * @ORM\Column(type="string", length=255)
      * @Assert\Email()
@@ -64,52 +68,20 @@ class User implements UserInterface
      */
     public $confirm_password;
 
-
-    /** @ORM\ManyToOne(targetEntity="App\Entity\Campus", inversedBy="User") */
+    /**
+     * @ORM\ManyToOne(targetEntity=Campus::class, inversedBy="users")
+     * @ORM\JoinColumn(nullable=false)
+     */
     private $campus;
 
     /**
-     * @param mixed $campus
-     *
-     * @return User
+     * @ORM\ManyToMany(targetEntity=Outing::class, inversedBy="Users")
      */
-    public function setCampus($campus): User
-    {
-        $this->campus = $campus;
-
-        return $this;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getCampus()
-    {
-        return $this->campus;
-    }
-
-
-    /** @ORM\ManyToMany(targetEntity="App\Entity\Outing") */
     private $outing;
 
-    /**
-     * @param mixed $outing
-     *
-     * @return User
-     */
-    public function setOuting($outing): User
+    public function __construct()
     {
-        $this->outing = $outing;
-
-        return $this;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getOuting()
-    {
-        return $this->outing;
+        $this->outing = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -208,4 +180,42 @@ class User implements UserInterface
     {
         // TODO: Implement eraseCredentials() method.
     }
+
+    public function getCampus(): ?Campus
+    {
+        return $this->campus;
+    }
+
+    public function setCampus(?Campus $campus): self
+    {
+        $this->campus = $campus;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Outing[]
+     */
+    public function getOuting(): Collection
+    {
+        return $this->outing;
+    }
+
+    public function addOuting(Outing $outing): self
+    {
+        if (!$this->outing->contains($outing)) {
+            $this->outing[] = $outing;
+        }
+
+        return $this;
+    }
+
+    public function removeOuting(Outing $outing): self
+    {
+        $this->outing->removeElement($outing);
+
+        return $this;
+    }
+
+
 }

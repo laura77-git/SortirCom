@@ -7,6 +7,12 @@
     <h1 style="text-align: center; margin-bottom:40px">Connexion</h1>
     <div class="container" style="text-align: center;">
         <div class="row" style="justify-content:center">
+           {# pour afficher message d'erreur formulaire login
+            (et pour l'avoir en français, aller dans dossier config
+            -> packages -> translation et mettre fr à la place de en) #}
+            {% if error %}
+                <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+            {% endif %}
             <form action="{{ path('security_login') }}" method="post">
                 <div class="col-md-10">
                     <label>Identifiant:

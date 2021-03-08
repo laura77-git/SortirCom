@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\OutingRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints\Date;
 
@@ -44,53 +46,44 @@ class Outing
     private $outing_info;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     * @ORM\ManyToOne(targetEntity="App\Entity\State", inversedBy="Outing")
+     * @ORM\Column(type="text")
      */
     private $state;
 
+    
     /**
-     * @param mixed $state
-     *
-     * @return Outing
+     * @ORM\ManyToMany(targetEntity=User::class, mappedBy="outing")
      */
-    public function setState($state): Outing
-    {
-        $this->state = $state;
-
-        return $this;
-    }
+    private $Users;
 
     /**
-     * @return mixed
+     * @ORM\ManyToOne(targetEntity=State::class, inversedBy="outings")
+     * @ORM\JoinColumn(nullable=false)
      */
-    public function getState()
-    {
-        return $this->state;
-    }
+    private $State;
 
-    /** @ORM\ManyToOne(targetEntity="App\Entity\Location", inversedBy="Outing") */
+    /**
+     * @ORM\ManyToOne(targetEntity=Location::class, inversedBy="outings")
+     * @ORM\JoinColumn(nullable=false)
+     */
     private $location;
 
     /**
-     * @param mixed $location
-     *
-     * @return Outing
+     * @ORM\ManyToOne(targetEntity=Campus::class, inversedBy="Outing")
+     * @ORM\JoinColumn(nullable=false)
      */
-    public function setLocation($location): Outing
-    {
-        $this->location = $location;
-
-        return $this;
-    }
+    private $campus;
+    private $users;
 
     /**
-     * @return mixed
+     * @var ArrayCollection
      */
-    public function getLocation()
+
+    public function __construct()
     {
-        return $this->location;
+        $this->Users = new ArrayCollection();
     }
+
 
     public function getId(): ?int
     {
@@ -121,7 +114,7 @@ class Outing
         return $this;
     }
 
-    public function getRegistrationDeadline():?int
+    public function getRegistrationDeadline(): ?int
     {
         return $this->registration_deadline;
     }
@@ -153,6 +146,69 @@ class Outing
     public function setOutingInfo(string $outing_info): self
     {
         $this->outing_info = $outing_info;
+
+        return $this;
+    }
+
+    public function getState(): ?State
+    {
+        return $this->state;
+    }
+
+    public function setState(?State $state): self
+    {
+        $this->state = $state;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|User[]
+     */
+    public function getUsers(): Collection
+    {
+        return $this->users;
+    }
+
+    public function addUser(User $user): self
+    {
+        if (!$this->users->contains($user)) {
+            $this->users[] = $user;
+            $user->addOuting($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUser(User $user): self
+    {
+        if ($this->users->removeElement($user)) {
+            $user->removeOuting($this);
+        }
+
+        return $this;
+    }
+
+    public function getLocation(): ?Location
+    {
+        return $this->location;
+    }
+
+    public function setLocation(?Location $location): self
+    {
+        $this->location = $location;
+
+        return $this;
+    }
+
+    public function getCampus(): ?Campus
+    {
+        return $this->campus;
+    }
+
+    public function setCampus(?Campus $campus): self
+    {
+        $this->campus = $campus;
 
         return $this;
     }
