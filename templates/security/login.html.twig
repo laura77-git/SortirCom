@@ -5,14 +5,17 @@
         <h1>Sortir.com</h1>
     </div>
     <h1 style="text-align: center; margin-bottom:40px">Connexion</h1>
+
     <div class="container" style="text-align: center;">
         <div class="row" style="justify-content:center">
+            <div class="col-md-10">
            {# pour afficher message d'erreur formulaire login
             (et pour l'avoir en français, aller dans dossier config
             -> packages -> translation et mettre fr à la place de en) #}
             {% if error %}
-                <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                <div style="color: red">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
             {% endif %}
+            </div>
             <form action="{{ path('security_login') }}" method="post">
                 <div class="col-md-10">
                     <label>Identifiant:
