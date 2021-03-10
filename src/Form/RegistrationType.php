@@ -7,7 +7,6 @@ use App\Entity\User;
 use App\Repository\CampusRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -23,13 +22,13 @@ class RegistrationType extends AbstractType
             ->add('phone')
             ->add('email')
             ->add('password', PasswordType::class) // mot de passe masqué
-            ->add('campus', EntityType::class, [
+            ->add('campus' , EntityType::class, [
                 'class' => Campus::class,
-                'query_builder' => function (CampusRepository $cr) {
-                    return $cr->createQueryBuilder('cr');
-                },
-                'choice_label' => 'name'
-            ])
+                    'query_builder' => function (CampusRepository $campusRepository){
+                return $campusRepository->createQueryBuilder('cr');
+                    },
+                    'choice_label' => 'name'
+                ])
            # ->add('outing')
             ->add('confirm_password', PasswordType::class)
 
@@ -42,18 +41,6 @@ class RegistrationType extends AbstractType
         $resolver->setDefaults([
             'data_class' => User::class,
         ]);
-    }
-
-    // fonction qui permet de récupérer le nom du campus
-    private function getChoices(CampusRepository $campusRepository)
-    {
-//        $choices =Campus::NAME;
-//        $output = [];
-//        foreach ($choices as $k => $v){   // $k => $v cà transforme la clé en variable
-//            $output[$v] = $k;
-//        }
-//        return $output;
-        return $campusRepository->findAll();
     }
 
 }

@@ -4,7 +4,9 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\RegistrationType;
+use App\Repository\CampusRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use PhpParser\Node\Name;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -20,7 +22,7 @@ class MyProfileController extends AbstractController
      * @param UserPasswordEncoderInterface $encoder
      * @return Response
      */
-    public function profile(Request $request, EntityManagerInterface $em, UserPasswordEncoderInterface $encoder): Response
+    public function profile(Request $request, EntityManagerInterface $em, UserPasswordEncoderInterface $encoder, CampusRepository $campusRepository): Response
     {
         $user = new User();
         $form = $this->createForm(RegistrationType::class, $user);
@@ -38,7 +40,9 @@ class MyProfileController extends AbstractController
         }
 
         return $this->render('pages/myProfile.html.twig', [
-            'form' => $form->createView()
+            'form' => $form->createView(),
+            'campus' => $campusRepository->findAll()
+
         ]);
     }
 }

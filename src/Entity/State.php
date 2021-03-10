@@ -12,6 +12,7 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class State
 {
+
     /**
      * @ORM\Id
      * @ORM\GeneratedValue

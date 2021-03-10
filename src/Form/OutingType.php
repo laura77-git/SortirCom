@@ -2,7 +2,12 @@
 
 namespace App\Form;
 
+use App\Entity\Campus;
 use App\Entity\Outing;
+use App\Entity\State;
+use App\Repository\CampusRepository;
+use App\Repository\StateRepository;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -17,11 +22,23 @@ class OutingType extends AbstractType
             ->add('registration_deadline')
             ->add('number_of_registration_max')
             ->add('outing_info')
-            ->add('state')
+            ->add('state', EntityType::class, [
+                'class' => State::class,
+                'query_builder' => function (StateRepository $stateRepository){
+                    return $stateRepository->createQueryBuilder('sr');
+                },
+                'choice_label' => 'name'
+            ])
             #->add('Users')
-           # ->add('State')
+            #->add('State')
             ->add('location')
-            ->add('campus')
+            ->add('campus', EntityType::class, [
+                'class' => Campus::class,
+                'query_builder' => function (CampusRepository $campusRepository){
+                    return $campusRepository->createQueryBuilder('cr');
+                },
+                'choice_label' => 'name'
+            ])
         ;
     }
 
@@ -31,4 +48,6 @@ class OutingType extends AbstractType
             'data_class' => Outing::class,
         ]);
     }
+
+
 }

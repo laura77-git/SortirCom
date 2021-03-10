@@ -24,10 +24,6 @@
         </div>
         <button type="submit" class="btn btn-primary">Enregistrer</button>
         {{ form_end(form) }}
-        {% for message in app.flashes('success') %}
-            <div class="alert alert-success">
-                {{ message }}
-            </div>
-        {% endfor %}
+
     </div>
 {% endblock %}

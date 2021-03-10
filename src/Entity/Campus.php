@@ -12,14 +12,6 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Campus
 {
-    // j'ai créee une constante pour les noms des campus pour récupérer
-    // les noms des campus dans la liste déroulante du formulaire d'inscription
-    const NAME = [
-        1 => 'Saint Herblain',
-        2 => 'Chartres De Bretagne',
-        3 => 'La Roche su yon'
-    ];
-
     /**
      * @ORM\Id
      * @ORM\GeneratedValue

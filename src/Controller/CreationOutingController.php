@@ -3,9 +3,9 @@
 namespace App\Controller;
 
 use App\Entity\Outing;
-use App\Entity\State;
-use App\Enum\Etat;
 use App\Form\OutingType;
+use App\Repository\CampusRepository;
+use App\Repository\StateRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -18,11 +18,12 @@ class CreationOutingController extends AbstractController
      * @Route("/creationSortie", name="creation_outing")
      * @param Request $request
      * @param EntityManagerInterface $em
+     * @param CampusRepository $campusRepository
+     * @param StateRepository $stateRepository
      * @return Response
      */
-    public function outing(Request $request, EntityManagerInterface $em): Response
+    public function outing(Request $request, EntityManagerInterface $em, CampusRepository $campusRepository, StateRepository $stateRepository): Response
     {
-        $state = $em->getRepository(State::class)->findOneBy(['name' => 'En attente']);
 
         $outing = new Outing();
         $form = $this->createForm(OutingType::class, $outing);
@@ -38,7 +39,9 @@ class CreationOutingController extends AbstractController
         }
 
         return $this->render('pages/creationOuting.html.twig', [
-            'form' => $form->createView()
+            'form' => $form->createView(),
+            'campus' => $campusRepository->findAll(),
+            'state' => $stateRepository->findAll()
         ]);
     }
 
