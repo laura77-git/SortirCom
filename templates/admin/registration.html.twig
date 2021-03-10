@@ -4,6 +4,11 @@
     <div class="jumbotron text-center">
         <h1>Sortir.com</h1>
     </div>
+    {% for message in app.flashes('success') %}
+        <div class="flash-success">
+            {{ message }}
+        </div>
+    {% endfor %}
     <h2 style="text-align: center; margin-bottom:40px">Inscription</h2>
     <div class="container" style="text-align: center;">
         {{ form_start(form) }}
