@@ -26,19 +26,23 @@
     <div class="flash-success">
         {{ message }}
     </div>
-    <div class="container" style="text-align: center;">
-        {{ form_start(form) }}
+    {% endfor %}
+
+     <div class="container" style="text-align: center;">
+       {{ form_start(outingform) }}
         <div class="row" style="justify-content:center">
-            <div class="col-md-6">{{ form_row(form.name, {'label': 'Nom'}) }}</div>
-            <div class="col-md-6">{{ form_row(form.duration,{'label': 'Durée'}) }}</div>
-            <div class="col-md-6">{{ form_row(form.registration_deadline, {'label': 'Date limite dinscription'}) }}</div>
-            <div class="col-md-6">{{ form_row(form.number_of_registration_max, {'label': 'Nombre de places'}) }}</div>
-            <div class="col-md-6">{{ form_row(form.outing_info, {'label': 'Description et info'}) }}</div>
-            <div class="col-md-6">{{ form_row(form.state, {'label': 'Etat'}) }}</div>
-            <div class="col-md-6">{{ form_row(form.location, {'label': 'Lieu'}) }}</div>
-            <div class="col-md-6">{{ form_row(form.campus, {'label': 'campus'}) }}</div>
-
-
+            <div class="col-md-6">{{ form_row(outingform.name, {'label': 'Nom'}) }}</div>
+            <div class="col-md-6">{{ form_row(outingform.duration,{'label': 'Durée'}) }}</div>
+            <div class="col-md-6">{{ form_row(outingform.registration_deadline, {'label': 'Date limite dinscription'}) }}</div>
+            <div class="col-md-6">{{ form_row(outingform.number_of_registration_max, {'label': 'Nombre de places'}) }}</div>
+            <div class="col-md-6">{{ form_row(outingform.outing_info, {'label': 'Description et info'}) }}</div>
+            <div class="col-md-6">{{ form_row(outingform.state, {'label': 'Etat'}) }}</div>
+            <div class="col-md-6">{{ form_row(outingform.location, {'label': 'Lieu'}) }}
+               <a href={{ path('creation_location') }}>
+                <button type="button" class="btn btn-primary">+</button>
+               </a>
+            </div>
+            <div class="col-md-6">{{ form_row(outingform.campus, {'label': 'campus'}) }}</div>
         </div>
         <button type="submit" class="btn btn-primary">Enregistrer</button>
         <button type="submit" class="btn btn-primary">Publier la sortie</button>
@@ -46,6 +50,6 @@
         <button type="submit" class="btn btn-primary">Annuler</button>
         </a>
 
-        {{ form_end(form) }}
+        {{ form_end(outingform) }}
     </div>
 {% endblock %}

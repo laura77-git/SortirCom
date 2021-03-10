@@ -62,9 +62,8 @@ class Location
 
     /**
      * @ORM\ManyToOne(targetEntity=City::class, inversedBy="locations")
-     * @ORM\JoinColumn(nullable=false)
      */
-    private $City;
+    private $city;
 
     public function __construct()
     {
@@ -141,11 +140,9 @@ class Location
 
     public function removeOuting(Outing $outing): self
     {
-        if ($this->outings->removeElement($outing)) {
-            // set the owning side to null (unless already changed)
-            if ($outing->getLocation() === $this) {
-                $outing->setLocation(null);
-            }
+        // set the owning side to null (unless already changed)
+        if ($this->outings->removeElement($outing) && $outing->getLocation() === $this) {
+            $outing->setLocation(null);
         }
 
         return $this;
@@ -153,12 +150,12 @@ class Location
 
     public function getCity(): ?City
     {
-        return $this->City;
+        return $this->city;
     }
 
     public function setCity(?City $City): self
     {
-        $this->City = $City;
+        $this->city = $City;
 
         return $this;
     }

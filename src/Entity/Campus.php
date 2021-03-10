@@ -48,12 +48,12 @@ class Campus
     /**
      * @ORM\OneToMany(targetEntity=Outing::class, mappedBy="campus", orphanRemoval=true)
      */
-    private $Outing;
+    private $outings;
 
     public function __construct()
     {
         $this->users = new ArrayCollection();
-        $this->Outing = new ArrayCollection();
+        $this->outings = new ArrayCollection();
     }
 
 
@@ -104,13 +104,13 @@ class Campus
      */
     public function getOuting(): Collection
     {
-        return $this->Outing;
+        return $this->outings;
     }
 
     public function addOuting(Outing $outing): self
     {
-        if (!$this->Outing->contains($outing)) {
-            $this->Outing[] = $outing;
+        if (!$this->outings->contains($outing)) {
+            $this->outings[] = $outing;
             $outing->setCampus($this);
         }
 
@@ -119,7 +119,7 @@ class Campus
 
     public function removeOuting(Outing $outing): self
     {
-        if ($this->Outing->removeElement($outing)) {
+        if ($this->outings->removeElement($outing)) {
             // set the owning side to null (unless already changed)
             if ($outing->getCampus() === $this) {
                 $outing->setCampus(null);

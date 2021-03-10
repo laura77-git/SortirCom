@@ -70,18 +70,17 @@ class User implements UserInterface
 
     /**
      * @ORM\ManyToOne(targetEntity=Campus::class, inversedBy="users")
-     * @ORM\JoinColumn(nullable=false)
      */
     private $campus;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Outing::class, inversedBy="Users")
+     * @ORM\ManyToMany(targetEntity=Outing::class, inversedBy="users")
      */
-    private $outing;
+    private $outings;
 
     public function __construct()
     {
-        $this->outing = new ArrayCollection();
+        $this->outings = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -166,17 +165,17 @@ class User implements UserInterface
         return $this;
     }
 
-    public function getRoles()
+    public function getRoles(): array
     {
         return ['ROLE_USER'];
     }
 
-    public function getSalt()
+    public function getSalt(): ?string
     {
-        // TODO: Implement getSalt() method.
+       return null;
     }
 
-    public function eraseCredentials()
+    public function eraseCredentials(): void
     {
         // TODO: Implement eraseCredentials() method.
     }
@@ -198,13 +197,13 @@ class User implements UserInterface
      */
     public function getOuting(): Collection
     {
-        return $this->outing;
+        return $this->outings;
     }
 
     public function addOuting(Outing $outing): self
     {
-        if (!$this->outing->contains($outing)) {
-            $this->outing[] = $outing;
+        if (!$this->outings->contains($outing)) {
+            $this->outings[] = $outing;
         }
 
         return $this;
@@ -212,7 +211,7 @@ class User implements UserInterface
 
     public function removeOuting(Outing $outing): self
     {
-        $this->outing->removeElement($outing);
+        $this->outings->removeElement($outing);
 
         return $this;
     }

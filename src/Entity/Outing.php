@@ -6,7 +6,6 @@ use App\Repository\OutingRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints\Date;
 
 /**
  * @ORM\Entity(repositoryClass=OutingRepository::class)
@@ -45,35 +44,47 @@ class Outing
      */
     private $outing_info;
 
-    /**
-     * @ORM\Column(type="text")
-     */
-    private $state;
 
     
     /**
-     * @ORM\ManyToMany(targetEntity=User::class, mappedBy="outing")
+     * @ORM\ManyToMany(targetEntity=User::class, mappedBy="outings")
      */
-    private $Users;
+    private $users;
 
     /**
      * @ORM\ManyToOne(targetEntity=State::class, inversedBy="outings")
-     * @ORM\JoinColumn(nullable=false)
      */
-    private $State;
+    private $state;
+    /**
+     * @var ArrayCollection
+     */
+
+
+    /**
+     * @return mixed
+     */
+    public function getState()
+    {
+        return $this->state;
+    }
+
+    /**
+     * @param mixed $state
+     */
+    public function setState($state): void
+    {
+        $this->state = $state;
+    }
 
     /**
      * @ORM\ManyToOne(targetEntity=Location::class, inversedBy="outings")
-     * @ORM\JoinColumn(nullable=false)
      */
     private $location;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Campus::class, inversedBy="Outing")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\ManyToOne(targetEntity=Campus::class, inversedBy="outings")
      */
     private $campus;
-    private $users;
 
     /**
      * @var ArrayCollection
@@ -81,7 +92,7 @@ class Outing
 
     public function __construct()
     {
-        $this->Users = new ArrayCollection();
+        $this->users = new ArrayCollection();
     }
 
 
@@ -150,17 +161,7 @@ class Outing
         return $this;
     }
 
-    public function getState(): ?State
-    {
-        return $this->state;
-    }
 
-    public function setState(?State $state): self
-    {
-        $this->state = $state;
-
-        return $this;
-    }
 
     /**
      * @return Collection|User[]
@@ -189,12 +190,12 @@ class Outing
         return $this;
     }
 
-    public function getLocation(): ?Location
+    public function getLocation(): ?string
     {
         return $this->location;
     }
 
-    public function setLocation(?Location $location): self
+    public function setLocation(string $location): self
     {
         $this->location = $location;
 

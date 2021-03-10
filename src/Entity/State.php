@@ -42,7 +42,7 @@ class State
     private $name;
 
     /**
-     * @ORM\OneToMany(targetEntity=Outing::class, mappedBy="State", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity=Outing::class, mappedBy="state", orphanRemoval=true)
      */
     private $outings;
 

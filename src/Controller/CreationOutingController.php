@@ -26,20 +26,20 @@ class CreationOutingController extends AbstractController
     {
 
         $outing = new Outing();
-        $form = $this->createForm(OutingType::class, $outing);
+        $outingform = $this->createForm(OutingType::class, $outing);
 
-        $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid())
+        $outingform->handleRequest($request); //injecte les données du formulaire
+        if ($outingform->isSubmitted() && $outingform->isValid())  //isValid permet d'afficher les messages d'erreurs de validation
         {
 
-            $em->persist($outing);
-            $em->flush();
-            $this->addFlash('success', 'Sortie créee avec succès');
-            return $this->redirectToRoute('home_connected');
+            $em->persist($outing);   // sauvegarde les infos
+            $em->flush();           // les envoie à la BDD
+            $this->addFlash('success', 'Sortie crée avec succès');
+            return $this->redirectToRoute('creation_outing');
         }
 
         return $this->render('pages/creationOuting.html.twig', [
-            'form' => $form->createView(),
+            'outingform' => $outingform->createView(),
             'campus' => $campusRepository->findAll(),
             'state' => $stateRepository->findAll()
         ]);

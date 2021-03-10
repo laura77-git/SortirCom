@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <a class="navbar-brand" href="{{ path('home_connected') }}">Accueil</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a href="{{ path('myProfile') }}" class="nav-link">Mon profil</a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ path('security_login') }}" class="nav-link">Se déconnecter</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div class="jumbotron text-center">
+        <h1>Sortir.com</h1>
+    </div>
+    <h2 style="text-align: center; margin-bottom:40px">Créer un lieu</h2>
+    {% for message in app.flashes('success') %}
+        <div class="flash-success">
+            {{ message }}
+        </div>
+    {% endfor %}
+
+    <div class="container" style="text-align: center;">
+        {{ form_start(locationform) }}
+        <div class="row" style="justify-content:center">
+            <div class="col-md-6">{{ form_row(locationform.name, {'label': 'Nom'}) }}</div>
+            <div class="col-md-6">{{ form_row(locationform.street,{'label': 'Rue'}) }}</div>
+            <div class="col-md-6">{{ form_row(locationform.latitude, {'label': 'Latitude'}) }}</div>
+            <div class="col-md-6">{{ form_row(locationform.longitude, {'label': 'Longitude'}) }}</div>
+
+        <button type="submit" class="btn btn-primary">Enregistrer</button>
+
+        {{ form_end(locationform) }}
+        </div>
+    <a href="{{ path('creation_outing') }}">
+        <button type="submit" class="btn btn-primary">Annuler</button>
+    </a>
+{% endblock %}
