@@ -100,13 +100,13 @@
             </tr>
             </thead>
             <tbody>
-
+            {% for outings in outing %}
             <tr>
+                <td>{{ outings.name }}</td>
+                <td>{{ outings.startDateTime|date("d/m/Y H:i") }}</td>
                 <td></td>
                 <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
+                <td>{{ outings.state.name }}</td>
                 <td></td>
                 <td></td>
                 <td><a href="{{ path('show_outing') }}">Afficher</a>
@@ -116,7 +116,7 @@
 
 
             </tr>
-
+{% endfor %}
             </tbody>
         </table>
     <br>
@@ -125,4 +125,5 @@
         <button type="submit" class="btn btn-primary">Créer une sortie</button>
         </a>
     </div>
+        </div>
 {% endblock %}

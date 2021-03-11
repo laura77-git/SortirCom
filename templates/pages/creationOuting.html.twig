@@ -32,6 +32,7 @@
        {{ form_start(outingform) }}
         <div class="row" style="justify-content:center">
             <div class="col-md-6">{{ form_row(outingform.name, {'label': 'Nom'}) }}</div>
+            <div class="col-md-6">{{ form_row(outingform.startDateTime, {'label': 'Date et heure de sortie'}) }}</div>
             <div class="col-md-6">{{ form_row(outingform.duration,{'label': 'Durée'}) }}</div>
             <div class="col-md-6">{{ form_row(outingform.registration_deadline, {'label': 'Date limite dinscription'}) }}</div>
             <div class="col-md-6">{{ form_row(outingform.number_of_registration_max, {'label': 'Nombre de places'}) }}</div>

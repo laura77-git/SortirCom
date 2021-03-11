@@ -25,6 +25,27 @@ class Outing
     private $name;
 
     /**
+     * @ORM\Column(type="datetime")
+     */
+    private $start_date_time;
+
+    /**
+     * @return mixed
+     */
+    public function getStartDateTime()
+    {
+        return $this->start_date_time;
+    }
+
+    /**
+     * @param mixed $start_date_time
+     */
+    public function setStartDateTime($start_date_time): void
+    {
+        $this->start_date_time = $start_date_time;
+    }
+
+    /**
      * @ORM\Column(type="time")
      */
     private $duration;
@@ -44,7 +65,26 @@ class Outing
      */
     private $outing_info;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $organizer_user;
 
+    /**
+     * @return mixed
+     */
+    public function getOrganizerUser()
+    {
+        return $this->organizer_user;
+    }
+
+    /**
+     * @param mixed $organizer_user
+     */
+    public function setOrganizerUser($organizer_user): void
+    {
+        $this->organizer_user = $organizer_user;
+    }
     
     /**
      * @ORM\ManyToMany(targetEntity=User::class, mappedBy="outings")
@@ -190,12 +230,12 @@ class Outing
         return $this;
     }
 
-    public function getLocation(): ?string
+    public function getLocation(): ?Location
     {
         return $this->location;
     }
 
-    public function setLocation(string $location): self
+    public function setLocation(?Location $location): self
     {
         $this->location = $location;
 

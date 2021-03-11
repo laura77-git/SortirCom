@@ -9,9 +9,9 @@ use App\Entity\State;
 use App\Repository\CampusRepository;
 use App\Repository\LocationRepository;
 use App\Repository\StateRepository;
-use PhpParser\Node\Expr\BinaryOp\LogicalXor;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -21,6 +21,12 @@ class OutingType extends AbstractType
     {
         $builder
             ->add('name')
+            ->add('startDateTime', DateTimeType::class, [
+                'placeholder' => [
+                    'year' => 'Année', 'month' => 'Mois', 'day' => 'Jour',
+                    'hour' => 'Heure', 'minute' => 'Minute', 'second' => 'Seconde'
+                ]
+            ])
             ->add('duration')
             ->add('registration_deadline')
             ->add('number_of_registration_max')

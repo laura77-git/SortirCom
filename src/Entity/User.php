@@ -170,6 +170,7 @@ class User implements UserInterface
         return ['ROLE_USER'];
     }
 
+
     public function getSalt(): ?string
     {
        return null;
