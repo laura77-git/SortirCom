@@ -8,7 +8,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass=LocationRepository::class)
+ * @ORM\Entity(repositoryClass="App\Repository\LocationRepository", repositoryClass=LocationRepository::class)
  */
 class Location
 {
@@ -159,6 +159,7 @@ class Location
 
         return $this;
     }
+
 
 
 

@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Location;
 use App\Form\LocationType;
+use App\Repository\LocationRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -16,9 +17,10 @@ class CreationLocationController extends AbstractController
      * @Route("/creationLieu", name="creation_location")
      * @param Request $request
      * @param EntityManagerInterface $em
+     * @param LocationRepository $locationRepository
      * @return Response
      */
-    public function outing(Request $request, EntityManagerInterface $em): Response
+    public function location(Request $request, EntityManagerInterface $em,LocationRepository $locationRepository): Response
     {
 
         $location = new Location();
@@ -36,7 +38,7 @@ class CreationLocationController extends AbstractController
 
         return $this->render('pages/creationLocation.html.twig', [
             'locationform' => $locationform->createView(),
-
+            'location' => $locationRepository->findAll()
         ]);
     }
 
